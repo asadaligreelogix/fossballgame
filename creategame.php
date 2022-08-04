@@ -49,6 +49,7 @@
                     <div class="list-group"> 
                         <input class="form-control form-control-lg mb-3 text-center" type = 'text' name = 'name' required placeholder = 'Enter Game Name'>
                         <input class="form-control form-control-lg mb-3 text-center" type = 'number' min="0" name = 'goals' required placeholder = 'Enter Number Of Goals'>
+                        <input class="form-control form-control-lg mb-3 text-center" type = 'text' name = 'gameCode' required placeholder = 'Game Code'>
                     </div>   
                 </div> 
                 <div class="card-footer p-3 m-0"> 
@@ -78,11 +79,12 @@
     {
         $name = test_input($_POST["name"]);
         $goals = test_input($_POST["goals"]);
+        $gameCode = test_input($_POST["gameCode"]);
 
         $_SESSION['gamestatus'] = $res;
 
         $team = $_SESSION['team'];
-        $game = "INSERT INTO creategame (gamename, numgoals, team) VALUES ('$name', '$goals', '$team')";
+        $game = "INSERT INTO creategame (gamename, numgoals, team, gameCode) VALUES ('$name', '$goals', '$team', '$gameCode')";
 
         if(mysqli_query($conn, $game))
         {

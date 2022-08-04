@@ -67,6 +67,7 @@ $tblcreategame = "CREATE TABLE creategame(
     gamename VARCHAR(30) NOT NULL,
     numgoals INT(5) NOT NULL,
     team VARCHAR(30) NOT NULL,
+    gameCode VARCHAR(30) NOT NULL,
     res INT(11) NOT NULL DEFAULT 0)"; 
 
 if(mysqli_query($conn, $tblcreategame))

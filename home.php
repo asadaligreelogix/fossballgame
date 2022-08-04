@@ -81,7 +81,8 @@ include 'sessions.php';
                                 else
                                 {
                     ?>
-                                <a href="game.php?gameID=<?php echo $gameID; ?>" class="list-group-item list-group-item-action flex-column align-items-start  mb-2">
+                                <input type="hidden" value="<?php echo $rows['id'];?>" id="input_<?php echo $rows['id'];?>">
+                                <a href="#"  data-toggle="modal" data-target="#exampleModalCenter" class="list-group-item list-group-item-action flex-column align-items-start  mb-2 modelID" data-id="<?php echo $rows['id'];?>">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1"><?php echo $rows['gamename']; ?><small class="mb-1 ml-2">Total Goals: <?php echo $rows['numgoals']; ?></small></h5>
                                         <small class="badge badge-info px-3 py-2 pt-2 f-12">Play Now</small>
@@ -107,11 +108,81 @@ include 'sessions.php';
 
             </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Enter Game Code</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning submitModal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             <div class="card-footer p-3 m-0"> 
                 <a href="logout.php" class="p-0"><input class="btn btn-danger font-weight-bold w-100" type="button" name="submit" value="Logout"></a>
             </div>
         </div>
     </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".modelID").click(function (e) { 
+                var modelID = $(this).attr("data-id"); 
+                var InputValue = $("#input_"+modelID).val(); 
+                let html = `
+                    <form id="validateGameCode" action="game.php?gameID=${InputValue}" method="POST">
+                        <input type="hidden" name="gameID" id="gameID" value="${InputValue}">
+                        <input type="text" name="gameCode" id="gameCode" placeholder="Game Code" class="form-control form-control-lg mb-3 text-center">
+                        <span class="form-control form-control-lg text-center text-danger border-0 p-0 m-0 gameCodeError"></span>
+                    </form> 
+                `; 
+                $('.modal-body').html(html);
+            });
+            $(".submitModal").click(function (e) { 
+                var gameCode = $('#gameCode').val();
+                var gameID = $('#gameID').val();
+                if(gameCode != ""){
+                    $.ajax({
+                        type: "post",
+                        url: "validateGameCode.php",
+                        data:{
+                            gameCode: gameCode,
+                            gameID: gameID,
+                        },
+                        success: function (response) {
+                            if(response == 1){
+                                $('#validateGameCode').submit();
+                                $('#exampleModalCenter').hide();
+                            }else{
+                                $('.gameCodeError').text("Invalid game code!").delay(2000).fadeOut();;
+                            }
+                        }
+                    });
+                }else{
+                    $('.gameCodeError').text("Game code required!").delay(2000).fadeOut();;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

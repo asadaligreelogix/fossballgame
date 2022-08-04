@@ -54,7 +54,7 @@ session_unset();
         }
         .card-body{
             background-image: url(images/bg2.jpg);
-            background-attachment: fixed;
+            /* background-attachment: fixed; */
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;

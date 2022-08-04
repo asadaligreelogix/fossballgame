@@ -45,7 +45,6 @@
                     <h1 class="col-8 font-weight-bold pl-0 pt-2 f-h1">Set Your Prefrences</h1>
                     <a href="home.php" class="col-4 pt-2 text-right pr-0"><input class="btn btn-success btn-sm font-weight-bold" type="button" name="submit" value="Lobby"></a>
                 </div>
-                
                 <div class="card-body px-5 text-center">
                     <div class="list-group"> 
                         <input class="form-control form-control-lg mb-3 text-center" type = 'text' name = 'name' required placeholder = 'Enter Game Name'>

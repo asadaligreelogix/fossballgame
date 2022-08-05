@@ -96,7 +96,7 @@ a {
             var gameID = $("#playArea").attr("data-gameID");
             var userID = <?php echo $userID; ?>;
             $.ajax({
-                url: "/fossballgame/addTap.php",
+                url: "/addTap.php",
                 type: "POST",
                 data: {
                     gameID : gameID,
@@ -110,7 +110,7 @@ a {
                         $(".centered").text(response.usergoals);
                     }
                     if(response.gameStatus != 1){
-                        window.location.replace(`/fossballgame/winnner.php?class=${response.class}&status=${response.status}`);
+                        window.location.replace(`/winnner.php?class=${response.class}&status=${response.status}`);
                     } 
                 },
                 error: function(error){

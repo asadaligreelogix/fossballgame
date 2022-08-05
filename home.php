@@ -32,10 +32,17 @@ include 'sessions.php';
         .card-footer{
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 100%; 
+        }
+        .card-header, .card-footer{
+            background-color:#fbfbfb !important;
         }
         .card{
             border: 0px !important;
+        }
+        .list-group{
+            height: 75vh;
+            overflow-y: scroll;
         }
     </style>
 </head>
@@ -81,7 +88,6 @@ include 'sessions.php';
                                 else
                                 {
                     ?>
-                                <input type="hidden" value="<?php echo $rows['id'];?>" id="input_<?php echo $rows['id'];?>">
                                 <a href="#"  data-toggle="modal" data-target="#exampleModalCenter" class="list-group-item list-group-item-action flex-column align-items-start  mb-2 modelID" data-id="<?php echo $rows['id'];?>">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1"><?php echo $rows['gamename']; ?><small class="mb-1 ml-2">Total Goals: <?php echo $rows['numgoals']; ?></small></h5>
@@ -146,11 +152,10 @@ include 'sessions.php';
     <script>
         $(document).ready(function () {
             $(".modelID").click(function (e) { 
-                var modelID = $(this).attr("data-id"); 
-                var InputValue = $("#input_"+modelID).val(); 
+                var modelID = $(this).attr("data-id");  
                 let html = `
-                    <form id="validateGameCode" action="game.php?gameID=${InputValue}" method="POST">
-                        <input type="hidden" name="gameID" id="gameID" value="${InputValue}">
+                    <form id="validateGameCode" action="game.php?gameID=${modelID}" method="POST">
+                        <input type="hidden" name="gameID" id="gameID" value="${modelID}">
                         <input type="text" name="gameCode" id="gameCode" placeholder="Game Code" class="form-control form-control-lg mb-3 text-center">
                         <span class="form-control form-control-lg text-center text-danger border-0 p-0 m-0 gameCodeError"></span>
                     </form> 

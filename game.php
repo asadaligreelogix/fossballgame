@@ -12,6 +12,7 @@ elseif ($_SESSION['team'] == 'Blue')
 }
 
 $userID = $_SESSION['userID'];
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -75,6 +76,8 @@ a {
     <!-- <div id="playArea" data-gameID="1" class="overlay"> -->
     <div id="playArea" data-gameID="<?php echo $_GET['gameID']; ?>" class="overlay">
         <span class="centered">Tap</span>
+        <br>
+        <span id="goals" class=""></span>
     </div>
     
     <!-- Optional JavaScript -->
@@ -93,7 +96,7 @@ a {
             var gameID = $("#playArea").attr("data-gameID");
             var userID = <?php echo $userID; ?>;
             $.ajax({
-                url: "/addTap.php",
+                url: "/fossballgame/addTap.php",
                 type: "POST",
                 data: {
                     gameID : gameID,
@@ -101,8 +104,13 @@ a {
                 },
                 success: function(html){
                     var response = JSON.parse(html); 
+
+                    if(response.gameStatus == 1)
+                    {
+                        $(".centered").text(response.usergoals);
+                    }
                     if(response.gameStatus != 1){
-                        window.location.replace(`/winnner.php?class=${response.class}&status=${response.status}`);
+                        window.location.replace(`/fossballgame/winnner.php?class=${response.class}&status=${response.status}`);
                     } 
                 },
                 error: function(error){

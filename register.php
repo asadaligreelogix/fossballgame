@@ -36,10 +36,17 @@
         .card-footer{
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 100%; 
+        }
+        .card-header, .card-footer{
+            background-color:#fbfbfb !important;
         }
         .card{
             border: 0px !important;
+        }
+        .list-group{
+            height: 75vh;
+            overflow-y: scroll;
         }
         .w88{
             width: 88px;

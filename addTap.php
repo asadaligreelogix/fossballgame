@@ -42,6 +42,7 @@ include 'sessions.php';
             //echo "Goal Inserted";
             $data = [
                 'gameStatus' => 1, 
+                'usergoals' => $userGoals, 
             ];
             return print_r(json_encode($data));
         }

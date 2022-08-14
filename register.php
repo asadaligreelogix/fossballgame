@@ -117,8 +117,18 @@
                             <label class="custom-control-label" for="customRadioInline2">Team Blue</label>
                         </div>
                     </label>
-                    
+                          
+            <?php
+                if(!by_pass_login_signup){
+            ?>
                     <input class="form-control mt-2 form-control-lg mb-3 text-center" type="submit" name="submit" value="Sign Up">
+            <?php
+                }else{    
+            ?>
+                    <input class="form-control mt-2 form-control-lg mb-3 text-center" type="submit" name="submit" value="Start Game">
+            <?php
+                }
+            ?>
                 </div>
                 <div class="card-body px-5 text-center vh80"></div>         
             <?php

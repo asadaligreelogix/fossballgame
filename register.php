@@ -1,15 +1,10 @@
 <?php
     session_start();
     include 'config.php';
-    
-    if(!by_pass_login_signup){
-        if(isset($_SESSION['login']))
-        {
-            header('Location: home.php');
-            exit();
-        }
-    }else{
+    if(isset($_SESSION['login']))
+    {
         header('Location: home.php');
+        exit();
     }
 
 ?>  

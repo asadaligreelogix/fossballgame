@@ -1,10 +1,12 @@
 <?php
-include 'sessions.php';
+    include 'sessions.php';
 
-session_unset();
+    if(!by_pass_login_signup){
+        session_unset();
 
-session_destroy();
+        session_destroy();
 
-header('Location: index.php');
+        header('Location: index.php');
+    }
 
 ?>

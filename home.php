@@ -134,10 +134,16 @@ include 'sessions.php';
     </div>
   </div>
 </div>
+            <?php
 
-            <div class="card-footer p-3 m-0"> 
-                <a href="logout.php" class="p-0"><input class="btn btn-danger font-weight-bold w-100" type="button" name="submit" value="Logout"></a>
-            </div>
+                if(!by_pass_login_signup){
+            ?>
+                    <div class="card-footer p-3 m-0"> 
+                    <a href="logout.php" class="p-0"><input class="btn btn-danger font-weight-bold w-100" type="button" name="submit" value="Logout"></a>
+                    </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
     

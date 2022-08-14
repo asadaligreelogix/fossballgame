@@ -1,4 +1,5 @@
 <?php
+    define('by_pass_login_signup', true);
     if($_SERVER['SERVER_NAME']=='fossball.greelogics.com'){
         $servername = 'localhost';
         $username = 'greeqhlk_game';

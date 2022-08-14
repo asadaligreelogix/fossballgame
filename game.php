@@ -68,6 +68,9 @@ a {
   right: 45px;
   font-size: 60px;
 }
+div#playArea:active {
+    background-color: #000000;
+}
 
     </style>
   </head>

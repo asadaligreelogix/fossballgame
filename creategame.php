@@ -48,7 +48,7 @@
                 <div class="card-body px-5 text-center">
                     <div class="list-group"> 
                         <input class="form-control form-control-lg mb-3 text-center" type = 'text' name = 'name' required placeholder = 'Enter Game Name'>
-                        <input class="form-control form-control-lg mb-3 text-center" type = 'number' min="0" name = 'goals' required placeholder = 'Enter Number Of Goals'>
+                        <input class="form-control form-control-lg mb-3 text-center" type = 'number' min="5" name = 'goals' value='5' required placeholder = 'Enter Number Of Goals'>
                         <input class="form-control form-control-lg mb-3 text-center" type = 'text' name = 'gameCode' required placeholder = 'Game Code'>
                     </div>   
                 </div> 

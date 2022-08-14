@@ -187,7 +187,8 @@
                     $_SESSION["email"] = $email;
                     $_SESSION["pass"] = $pass;
                     $_SESSION['userID'] = $row['userid'];
-                    $_SESSION['team'] = $row['user']; 
+                    $_SESSION['team'] = $row['user'];
+                    $_SESSION["login"] = 1; 
                     header ('Location: home.php');
                     exit();       
                 }

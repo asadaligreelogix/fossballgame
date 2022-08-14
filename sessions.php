@@ -1,16 +1,12 @@
 <?php
 
-session_start();
+    session_start();
 
-include 'config.php';
-if(!by_pass_login_signup){
+    include 'config.php';
     if(!$_SESSION['login'])
     {
         header('Location: index.php');
         exit();
     }
-}
-
-// print_r($_SESSION);
 
 ?>

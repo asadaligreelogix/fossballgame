@@ -99,9 +99,17 @@
                 
                 <div class="formOnBody px-3 py-0 m-0 text-center">
                     
+            <?php
+
+                if(!by_pass_login_signup){
+            ?>
                     <input class="form-control form-control-lg mb-3 text-center" required type = 'text' name = 'name' placeholder = 'Enter Your Name'>
                     <input class="form-control form-control-lg mb-3 text-center" required type = 'email' name = 'email' placeholder = 'Enter Your Email'>
                     <input class="form-control form-control-lg mb-3 text-center" required type = 'password' name = 'pass' placeholder = 'Create Your Password'>
+                    
+            <?php
+                }
+            ?>
                     <label class="cusRounded">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input required type="radio" checked id="customRadioInline1" name = 'team' value = 'Red' class="custom-control-input">
@@ -117,11 +125,19 @@
                     
                     <input class="form-control mt-2 form-control-lg mb-3 text-center" type="submit" name="submit" value="Sign Up">
                 </div>
-                <div class="card-body px-5 text-center vh80"></div>
+                <div class="card-body px-5 text-center vh80"></div>         
+            <?php
+
+                if(!by_pass_login_signup){
+            ?>
                 <div class="card-footer row p-3 m-0">
                     <h1 class="col-8 font-weight-bold pl-0 pt-2 f-h1">Already Have An Account?</h1>
                     <a href="index.php" class="col-4 pt-2 text-right pr-0"><input class="btn btn-success btn-sm font-weight-bold" type="button" name="submit" value="Sign In"></a>
                 </div>
+                
+            <?php
+                }
+            ?>
             </div>
         </form>
     </div>
@@ -149,11 +165,33 @@
         $pass = test_input($_POST["pass"]);
         $team = test_input($_POST["team"]);
 
-
-        $ins = "INSERT INTO register(username, email, pass, user) VALUES ('$username', '$email', '$pass', '$team')";
-
+        if(!by_pass_login_signup){
+            $ins = "INSERT INTO register(username, email, pass, user) VALUES ('$username', '$email', '$pass', '$team')";
+        }else{
+            $username = 'foss'.rand(100,999).'ball'.rand(100,999).'game'.rand(100,999).'user'.rand(10000,99999);
+            $email    = 'foss'.rand(100,999).'ball'.rand(100,999).'game'.rand(10000,99999).'@user.com';
+            $pass     = 'foss'.rand(10,9999).'user';
+            $ins = "INSERT INTO register(username, email, pass, user) VALUES ('$username', '$email', '$pass', '$team')";
+        }
+        
+        // $_SESSION['userID'] = $ins['userid'];
+        // $_SESSION['team'] = $ins['user'];
         if(mysqli_query($conn, $ins))
-        {
+        {   
+            if(by_pass_login_signup){
+                $login = "SELECT * FROM register WHERE email = '$email' && pass = '$pass'";
+                $res = mysqli_query($conn, $login);
+                $row = mysqli_fetch_assoc($res);
+                if($row > 0)
+                {
+                    $_SESSION["email"] = $email;
+                    $_SESSION["pass"] = $pass;
+                    $_SESSION['userID'] = $row['userid'];
+                    $_SESSION['team'] = $row['user']; 
+                    header ('Location: home.php');
+                    exit();       
+                }
+            }
         ?>
             <script>
                 swal({

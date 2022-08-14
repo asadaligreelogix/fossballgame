@@ -10,7 +10,7 @@
             exit();
         }
     }else{
-        header('Location: home.php');
+        header('Location: register.php');
     }
 
     session_unset();
